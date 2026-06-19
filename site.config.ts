@@ -5,7 +5,9 @@ type SiteConfig = {
 };
 
 export const siteConfig: SiteConfig = {
-  site_name: "Indexly",
-  site_description: "Indexly - SEO & AI Visibility Platform",
-  site_domain: "https://indexly.ai",
+  site_name: process.env.BLOG_BRAND_NAME || "",
+  site_description:
+    process.env.BLOG_META_DESCRIPTION ||
+    "",
+  site_domain: process.env.BLOG_SITE_DOMAIN || "",
 };
