@@ -1,6 +1,7 @@
 /** @type {import('next-sitemap').IConfig} */
+const siteDomain = process.env.BLOG_SITE_DOMAIN || "";
+
 module.exports = {
-    siteUrl: 'https://indexly.ai/',
-    generateRobotsTxt: true, // (optional)
-    // ...other options
-  }
+  siteUrl: siteDomain.endsWith("/") ? siteDomain : `${siteDomain}/`,
+  generateRobotsTxt: true,
+};

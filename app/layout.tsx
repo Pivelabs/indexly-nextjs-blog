@@ -27,8 +27,8 @@ const fontDisplay = FontDisplay({
 });
 
 export const metadata: Metadata = {
-  title: "indexly",
-  description: "SEO & AI Visibility Platform",
+  title: blogConfig.brandName,
+  description: blogConfig.metaDescription,
   metadataBase: new URL(siteConfig.site_domain),
   alternates: {
     canonical: "/",
