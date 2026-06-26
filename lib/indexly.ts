@@ -19,7 +19,7 @@ export async function fetchPosts({
 }: IndexlyCMSConfig) {
   const endpoint = pagination
     ? `${apiBaseUrl}/api/v1/content?pagination=true&page=${page}&limit=${limit}&siteId=${siteId ?? ""}`
-    : `${apiBaseUrl}/api/v1/content`;
+    : `${apiBaseUrl}/api/v1/content?siteId=${siteId ?? ""}`;
 
   const res = await fetch(endpoint, {
     headers: {
