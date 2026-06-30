@@ -1,5 +1,8 @@
 # Indexly Sample Blog
 
+Make your [Indexly](https://indexly.ai) generated articles show up as your own blog.
+
+
 ## Prerequisites
 
 - Node.js v18+
