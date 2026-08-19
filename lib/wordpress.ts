@@ -7,7 +7,7 @@ import type {
   Page,
   Author,
   FeaturedMedia,
-} from "./wordpress";
+} from "./wordpress.d";
 
 const WP_URL = process.env.WORDPRESS_URL?.replace(/\/+$/, ""); // e.g. https://wp.mysite.com
 const WP_USERNAME = process.env.WP_USERNAME;

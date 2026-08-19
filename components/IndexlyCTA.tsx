@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronRight } from "lucide-react";
 import { blogConfig } from "@/lib/blog-config";
 import { siteConfig } from "@/site.config";
@@ -11,13 +12,14 @@ export default function IndexlyCTA() {
     <div className="rounded-md border border-olive-100 bg-gradient-to-b from-olive-50 to-olive-100 ring-1 ring-olive-200/70 p-6 not-prose">
       <div className="flex items-center gap-2 mb-4">
         <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 p-1 overflow-hidden" style={{ borderRadius: '100%'}}>
-          <img
+          <Image
             src={logoUrl}
             alt={`${blogConfig.brandName} logo`}
             width={40}
             height={40}
             className="h-8 w-8 object-contain rounded-full" 
             style={{ borderRadius: '100%'}}
+            unoptimized
           />
         </span>
         <span className="font-display text-lg font-medium text-olive-950">

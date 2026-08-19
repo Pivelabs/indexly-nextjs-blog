@@ -1,6 +1,7 @@
 import type { IndexlyPost } from "../types";
 import { cn } from "../lib/utils";
-import { url } from "inspector/promises";
+import Link from "next/link";
+import SmartImage from "./SmartImage";
 
 export function FeaturedPostCard({ post }: { post: IndexlyPost }) {
   const date = new Date(post.updatedAt).toLocaleDateString("en-US", {
@@ -22,7 +23,7 @@ export function FeaturedPostCard({ post }: { post: IndexlyPost }) {
   }
 
   return (
-    <a
+    <Link
       href={url}
       className={cn(
         "group grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 not-prose",
@@ -32,7 +33,7 @@ export function FeaturedPostCard({ post }: { post: IndexlyPost }) {
     >
       <div className="relative aspect-[16/10] md:aspect-auto md:h-full w-full overflow-hidden rounded-lg bg-muted">
         {imageUrl ? (
-          <img
+          <SmartImage
             src={imageUrl}
             alt={imageAlt}
             width={1200}
@@ -85,7 +86,7 @@ export function FeaturedPostCard({ post }: { post: IndexlyPost }) {
           </span>
         </div> */}
       </div>
-    </a>
+    </Link>
   );
 }
 
@@ -97,7 +98,7 @@ export function PostCard({ post }: { post: IndexlyPost }) {
   });
 
   const imageUrl = post.heroImage ?? null;
-  const imageAlt = post.selectedTitle;
+  const imageAlt = post.selectedTitle || post.topic || "Post Image";
   const category = post.primaryKeyword ?? null;
   // const author = post.primaryAuthor ?? null;
 
@@ -109,7 +110,7 @@ export function PostCard({ post }: { post: IndexlyPost }) {
 }
 
   return (
-    <a
+    <Link
       href={url}
       className={cn(
         "group flex flex-col gap-4 not-prose border border-olive-200 p-4 bg-white",
@@ -118,7 +119,7 @@ export function PostCard({ post }: { post: IndexlyPost }) {
     >
       <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-muted">
         {imageUrl ? (
-          <img
+          <SmartImage
             src={imageUrl}
             alt={imageAlt}
             width={800}
@@ -165,6 +166,6 @@ export function PostCard({ post }: { post: IndexlyPost }) {
           {date}
         </span>
       </div> */}
-    </a>
+    </Link>
   );
 }
