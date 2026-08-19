@@ -60,13 +60,12 @@ export function FeaturedPostCard({ post }: { post: GhostPost }) {
 
         <div className="flex items-center gap-3 text-xs text-olive-500">
           {author?.profile_image ? (
-            <img
+            <SmartImage
               src={author.profile_image}
               alt={author.name}
               width={28}
               height={28}
               className="h-7 w-7 rounded-full object-cover"
-              loading="lazy"
             />
           ) : (
             <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-muted text-xs font-medium text-muted-foreground">
@@ -134,13 +133,12 @@ export function PostCard({ post }: { post: GhostPost }) {
 
       <div className="flex items-center gap-3 text-xs text-olive-500 mt-auto">
         {author?.profile_image ? (
-          <img
+          <SmartImage
             src={author.profile_image}
             alt={author.name}
             width={28}
             height={28}
             className="h-7 w-7 rounded-full object-cover"
-            loading="lazy"
           />
         ) : (
           <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-muted text-xs font-medium text-muted-foreground">

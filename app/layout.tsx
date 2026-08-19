@@ -11,6 +11,7 @@ import { Section, Container } from "@/components/craft";
 import { Analytics } from "@vercel/analytics/react";
 import { siteConfig } from "@/site.config";
 import Link from "next/link";
+import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 import { blogConfig } from "@/lib/blog-config";
@@ -88,12 +89,13 @@ const Nav = ({ className, children, id }: NavProps) => {
           target="_blank"
         >
           <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-gray-200 overflow-hidden">
-            <img
-              src={blogConfig.logoUrl}
+            <Image
+              src={blogConfig.logoUrl || "/favicon.ico"}
               alt={blogConfig.brandName + " logo"}
               width={32}
               height={32}
               className="h-8 w-8 object-contain rounded-full"
+              unoptimized
             />
           </span>
           <div className="text-lg font-medium">{blogConfig.brandName}</div>

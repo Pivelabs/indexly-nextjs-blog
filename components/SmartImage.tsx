@@ -33,13 +33,14 @@ export default function SmartImage({
   if (needsProxy) {
     const proxyUrl = `/blog/api/ghost-image?src=${encodeURIComponent(src)}`;
     return (
-      <img
+      <Image
         src={proxyUrl}
         alt={alt}
         width={width}
         height={height}
+        fill={fill}
         className={className}
-        loading="lazy"
+        unoptimized
         {...rest}
       />
     );

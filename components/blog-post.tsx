@@ -3,6 +3,8 @@ import { IndexlyPost } from "../types";
 import { Article } from "./craft";
 import Toc from "./ui/TOC";
 import ShareButtons from "./ShareButtons";
+import Link from "next/link";
+import SmartImage from "./SmartImage";
 
 type BlogPostProps = {
     post: IndexlyPost
@@ -32,12 +34,12 @@ export function BlogPost({ post }: BlogPostProps) {
         <>
             <div className="text-center max-w-6xl mx-auto px-4 sm:px-6 pt-10 space-y-2 not-prose">
                 <nav aria-label="Breadcrumb" className="flex justify-left pb-4">
-                    <a
+                    <Link
                         href="/"
                         className="justify-left text-olive-500 hover:text-olive-950 transition-colors !no-underline !decoration-transparent"
                     >
                         &lt; All posts
-                    </a>
+                    </Link>
                 </nav>
                 <h1 className="font-display text-4xl/4 font-medium leading-normal text-pretty text-olive-950">
                     {post.selectedTitle || post.topic || "Untitled Post"}
@@ -85,7 +87,7 @@ export function BlogPost({ post }: BlogPostProps) {
                         {/* Featured Image */}
                         {featuredImageUrl && (
                             <div className="-mx-4 sm:-mx-6 lg:mx-0 overflow-hidden lg:rounded-lg bg-accent/25">
-                                <img
+                                <SmartImage
                                     src={featuredImageUrl}
                                     alt={post.selectedTitle || post.topic || "Post Image"}
                                     width={1200}

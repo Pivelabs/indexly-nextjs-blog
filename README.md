@@ -33,30 +33,35 @@ cp .env.example .env
 Fill in your `.env` file:
 
 ```env
-# Indexly API
+# Server
+SERVER_PORT=3000
+
+# Indexly API (required for /blog routes)
 INDEXLY_API_KEY=your-api-key-here
-INDEXLY_SITE_ID=your-site-id-here
 INDEXLY_API_URL=https://app.indexly.ai
+INDEXLY_SITE_ID=your-site-id-here
 
-# Site & SEO
-BLOG_SITE_DOMAIN=https://blog.yourcompany.com
+# Blog branding & site config
 BLOG_BRAND_NAME=Acme Corp
-BLOG_META_DESCRIPTION=Insights and updates from Acme Corp
-
-# Branding
 BLOG_BRAND_DESCRIPTION=Welcome to the Acme Corp blog.
+BLOG_META_DESCRIPTION=Insights and updates from Acme Corp
+BLOG_SITE_DOMAIN=https://blog.yourcompany.com
 BLOG_LOGO_URL=https://blog.yourcompany.com/logo.png
 BLOG_WEBSITE_URL=https://yourcompany.com
 BLOG_SIGNUP_URL=https://yourcompany.com/get-started
-
-# Optional CTA
 BLOG_CTA_HEADING=Try Acme Corp today
 BLOG_CTA_SUBTITLE=Get started in minutes.
 BLOG_DEMO_URL=https://yourcompany.com/demo
+
+# Optional — Ghost CMS integration (only needed for Ghost-backed pages: tags, authors, categories, sitemap)
+GHOST_URL=https://your-ghost-site.com
+GHOST_CONTENT_API_KEY=your-ghost-content-api-key
+GHOST_API_VERSION=v5.0
 ```
 
 | Variable | Required | Description |
 |----------|----------|-------------|
+| `SERVER_PORT` | No | Local server port; defaults to `3000` |
 | `INDEXLY_API_KEY` | Yes | Indexly API key |
 | `INDEXLY_SITE_ID` | Yes | Indexly site ID |
 | `INDEXLY_API_URL` | No | Defaults to `https://app.indexly.ai` |
@@ -70,6 +75,9 @@ BLOG_DEMO_URL=https://yourcompany.com/demo
 | `BLOG_CTA_HEADING` | No | Sidebar CTA headline |
 | `BLOG_CTA_SUBTITLE` | No | Sidebar CTA subtitle |
 | `BLOG_DEMO_URL` | No | Demo button link |
+| `GHOST_URL` | No | Ghost CMS URL for Ghost-backed pages |
+| `GHOST_CONTENT_API_KEY` | No | Ghost Content API key |
+| `GHOST_API_VERSION` | No | Ghost Content API version; defaults to `v5.0` |
 
 ### 4. Add favicon and logo
 

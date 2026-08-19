@@ -2,7 +2,7 @@
 // Ghost Content API client — parallel to lib/wordpress.ts.
 // Docs: https://ghost.org/docs/content-api/
 //
-// Required env vars:
+// Optional env vars (required only when using Ghost-backed routes):
 //   GHOST_URL                — e.g. https://yourblog.ghost.io (no trailing slash needed)
 //   GHOST_CONTENT_API_KEY    — Content API key from Ghost Admin > Settings > Integrations
 //
@@ -18,20 +18,17 @@ import type {
   GhostAuthor,
   GhostResponse,
   GhostPagination,
-} from "./ghost";
+} from "./ghost.d";
 
 const GHOST_URL = process.env.GHOST_URL?.replace(/\/+$/, "");
 const GHOST_CONTENT_API_KEY = process.env.GHOST_CONTENT_API_KEY;
 const GHOST_API_VERSION = process.env.GHOST_API_VERSION ?? "v5.0";
 
-if (!GHOST_URL) {
-  throw new Error("GHOST_URL environment variable is not defined");
-}
-if (!GHOST_CONTENT_API_KEY) {
-  throw new Error("GHOST_CONTENT_API_KEY environment variable is not defined");
+export function isGhostConfigured(): boolean {
+  return Boolean(GHOST_URL && GHOST_CONTENT_API_KEY);
 }
 
-const API_BASE = `${GHOST_URL}/ghost/api/content`;
+const API_BASE = GHOST_URL ? `${GHOST_URL}/ghost/api/content` : "";
 
 export class GhostAPIError extends Error {
   constructor(
@@ -61,6 +58,14 @@ async function ghostFetch<T>(
   query?: Record<string, any>,
   cacheOptions?: CacheOptions
 ): Promise<T> {
+  if (!isGhostConfigured()) {
+    throw new GhostAPIError(
+      "Ghost is not configured. Set GHOST_URL and GHOST_CONTENT_API_KEY.",
+      503,
+      resource
+    );
+  }
+
   const params = {
     key: GHOST_CONTENT_API_KEY,
     ...(query ?? {}),
@@ -98,6 +103,10 @@ async function ghostCollection<T>(
   query?: Record<string, any>,
   cacheOptions?: CacheOptions
 ): Promise<{ items: T[]; pagination?: GhostPagination }> {
+  if (!isGhostConfigured()) {
+    return { items: [] };
+  }
+
   const body = await ghostFetch<Record<string, any>>(`/${resource}/`, query, cacheOptions);
   return {
     items: (body[resource] ?? []) as T[],

@@ -43,7 +43,6 @@ const nextConfig = {
   },
 
   compress: true,
-  swcMinify: true,
   experimental: { scrollRestoration: true },
 };
 
