@@ -1,6 +1,7 @@
 // app/blog/[id]/page.tsx
 
 import { BlogPost } from "@/components/blog-post";
+import { notFound } from "next/navigation";
 import { fetchPostDetails } from "../../../lib/indexly";
 
 type Props = {
@@ -19,9 +20,9 @@ export default async function Page({ params }: Props) {
     process.env.INDEXLY_SITE_ID
   );
 
-  console.log("Fetched post:", post);
-  console.log("Post slug:", post.slug);
-  console.log("Identifier:", identifier);
+  if (!post) {
+    notFound();
+  }
 
   return <BlogPost post={post} />;
 }
