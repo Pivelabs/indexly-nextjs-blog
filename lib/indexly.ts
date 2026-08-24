@@ -68,9 +68,15 @@ export async function fetchPostDetails(
 ) {
   const isObjectId = /^[a-f\d]{24}$/i.test(identifier);
 
-  const endpoint = isObjectId
-    ? `${apiBaseUrl}/api/v1/content?id=${identifier}${siteId ? `&siteId=${siteId}` : ""}`
-    : `${apiBaseUrl}/api/v1/content?slug=${encodeURIComponent(identifier)}${siteId ? `&siteId=${siteId}` : ""}`;
+  const endpoint = new URL("/api/v1/content", apiBaseUrl);
+  endpoint.searchParams.set(
+    isObjectId ? "id" : "slug",
+    isObjectId ? identifier : decodeURIComponent(identifier),
+  );
+
+  if (siteId) {
+    endpoint.searchParams.set("siteId", siteId);
+  }
 
   const res = await fetch(endpoint, {
     headers: {
